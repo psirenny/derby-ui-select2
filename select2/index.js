@@ -183,14 +183,32 @@ exports.create = function (model, dom) {
       self.emit('open'); 
     });
 
+    function setDataval(val) {
+      // ensure we aren't responding to a set event we just triggered
+      if (datavalSet) return (datavalSet = false);
+      el.select2('data', val);
+      datavalSet = valSet = true;
+      opts.dataval.set(el.select2('data'));
+      opts.val.set(el.select2('val'));
+    }
+
+    function setVal(val) {
+      // ensure we aren't responding to a set event we just triggered
+      if (valSet) return (valSet = false);
+      el.select2('val', val);
+      datavalSet = valSet = true;
+      opts.dataval.set(el.select2('data'));
+      opts.val.set(el.select2('val'));
+    }
+
+    if (opts.dataval.get()) setDataval(opts.dataval.get());
+    else if (opts.val.get()) setVal(opts.val.get());
+    
+    opts.dataval.on('set', setDataval);
+    opts.val.on('set', setVal);
+
     opts.close.on('set', function (close) {
       el.select2(close ? 'close' : 'open');
-    });
-
-    opts.dataval.on('set', function (val) {
-      // ensure we aren't responding to a set event we just triggered
-      if (!datavalSet) el.select2('data', val);
-      datavalSet = false;
     });
 
     opts.destroy.on('set', function (destroy) {
@@ -215,12 +233,6 @@ exports.create = function (model, dom) {
 
     opts.open.on('set', function (open) {
       el.select2(open ? 'open' : 'close');
-    });
-
-    opts.val.on('set', function (val) {
-      // ensure we aren't responding to a set event we just triggered
-      if (!valSet) el.select2('val', val);
-      valSet = false;
     });
   });
 }
