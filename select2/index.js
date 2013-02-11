@@ -117,17 +117,19 @@ exports.create = function (model, dom) {
     opts.inputtype.set(requireHidden ? 'hidden' : 'select');
   }
 
-  var isHidden = opts.inputtype.get() === 'hidden'
-    , el = dom.element(isHidden ? 'input' : 'select');
-
+  // infer if select allows multiple values
   if (typeof opts.multiple.get() === 'undefined') {
     if (opts.closeonselect.get()) opts.multiple.set(true);
   }
 
+  var isHidden = opts.inputtype.get() === 'hidden'
+    , el = dom.element(isHidden ? 'input' : 'select');
+
+  // parameters to pass to $.fn.select2
   var params = {
       ajax: opts.ajax.get()
     , allowClear: opts.allowclear.get()
-    , containerCss: opts.contaienrcssfn || opts.containercss.get()
+    , containerCss: opts.containercssfn || opts.containercss.get()
     , containerCssClass: opts.containercssclassfn || opts.containercssclass.get()
     , data: opts.data.get()
     , dropdownCss: opts.dropdowncssfn || opts.dropdowncss.get()
@@ -168,6 +170,7 @@ exports.create = function (model, dom) {
     el = $(el).select2(params);
     opts.container.set(el.select2('container'));
 
+    // allow binding to the change event
     el.on('change', function (e) {
       datavalSet = valSet = true;
       opts.val.set(el.select2('val'));
@@ -175,6 +178,7 @@ exports.create = function (model, dom) {
       self.emit('change', e);
     });
 
+    // allow binding to the open event
     el.on('open', function () {
       self.emit('open'); 
     });
@@ -184,6 +188,7 @@ exports.create = function (model, dom) {
     });
 
     opts.dataval.on('set', function (val) {
+      // ensure we aren't responding to a set event we just triggered
       if (!datavalSet) el.select2('data', val);
       datavalSet = false;
     });
@@ -213,6 +218,7 @@ exports.create = function (model, dom) {
     });
 
     opts.val.on('set', function (val) {
+      // ensure we aren't responding to a set event we just triggered
       if (!valSet) el.select2('val', val);
       valSet = false;
     });
