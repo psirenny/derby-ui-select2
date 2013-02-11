@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "underscore": "*"
+    , "underscore.string": "*"
+  }
+  , "description": "A Derby component for the select2.js jQuery plugin."
+  , "engines": {
+    "node": ">=0.6.0"
+  }
+  , "name": "derby-ui-select2"
+  , "version": "0.0.1"
+}
