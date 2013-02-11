@@ -136,7 +136,7 @@ exports.create = function (model, dom) {
     , dropdownCssClass: opts.dropdowncssclassfn || opts.dropdowncssclass.get()
     , escapeMarkup: opts.escapemarkupfn
     , formatInputTooShort: opts.formatinputtooshortfn
-    , formatNoMatches: opts.formatnotmatchesfn
+    , formatNoMatches: opts.formatnomatchesfn
     , formatResult: opts.formatresultfn
     , formatResultCss: opts.formatresultcssfn
     , formatResultCssClass: opts.formatresultcssclassfn
