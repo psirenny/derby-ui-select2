@@ -1,9 +1,9 @@
 var config = {
   filename: __filename
   , ns: 'select2'
-	, scripts: {
-		select2: require('./select2')
-	}
+  , scripts: {
+    select2: require('./select2')
+  }
 };
 
 module.exports = select2;
