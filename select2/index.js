@@ -93,7 +93,7 @@ exports.create = function (model, dom) {
     if (_.isFunction(val)) return (opts[key] = val);
     opts[key].set(val);
   });
-  
+
   // resolve function option names to their actual functions
   _.each(optfns, function (optfn) {
     if (_.isFunction(opts[optfn])) return;
@@ -110,7 +110,7 @@ exports.create = function (model, dom) {
 
   // infer input type if it is not specified
   if (typeof opts.inputtype.get() === 'undefined') {
-    var requireHidden = 
+    var requireHidden =
       opts.ajax.get() ||
       opts.data.get() ||
       opts.queryfn;
@@ -131,6 +131,7 @@ exports.create = function (model, dom) {
     , allowClear: opts.allowclear.get()
     , containerCss: opts.containercssfn || opts.containercss.get()
     , containerCssClass: opts.containercssclassfn || opts.containercssclass.get()
+    , createSearchChoice: opts.createsearchchoicefn || opts.createsearchchoice.get()
     , data: opts.data.get()
     , dropdownCss: opts.dropdowncssfn || opts.dropdowncss.get()
     , dropdownCssClass: opts.dropdowncssclassfn || opts.dropdowncssclass.get()
@@ -180,7 +181,7 @@ exports.create = function (model, dom) {
 
     // allow binding to the open event
     el.on('open', function () {
-      self.emit('open'); 
+      self.emit('open');
     });
 
     function setDataval(val) {
@@ -203,7 +204,7 @@ exports.create = function (model, dom) {
 
     if (opts.dataval.get()) setDataval(opts.dataval.get());
     else if (opts.val.get()) setVal(opts.val.get());
-    
+
     opts.dataval.on('set', setDataval);
     opts.val.on('set', setVal);
 
