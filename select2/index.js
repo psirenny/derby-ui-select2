@@ -131,7 +131,7 @@ exports.create = function (model, dom) {
     , allowClear: opts.allowclear.get()
     , containerCss: opts.containercssfn || opts.containercss.get()
     , containerCssClass: opts.containercssclassfn || opts.containercssclass.get()
-    , createSearchChoice: opts.createsearchchoicefn || opts.createsearchchoice.get()
+    , createSearchChoice: opts.createsearchchoicefn
     , data: opts.data.get()
     , dropdownCss: opts.dropdowncssfn || opts.dropdowncss.get()
     , dropdownCssClass: opts.dropdowncssclassfn || opts.dropdowncssclass.get()
