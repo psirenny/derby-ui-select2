@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "underscore": "*"
-    , "underscore.string": "*"
+    "underscore": "*",
+    "underscore.string": "*"
   }
   , "description": "A Derby component for the select2.js jQuery plugin."
   , "engines": {
