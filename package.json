@@ -8,5 +8,5 @@
     "node": ">=0.6.0"
   }
   , "name": "derby-ui-select2"
-  , "version": "0.0.1"
+  , "version": "0.1.0"
 }
